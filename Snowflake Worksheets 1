@@ -1,0 +1,21 @@
+Create warehouse snowspark_etl 
+    with 
+    warehouse_size = 'medium'
+    warehouse_type = 'standard'
+    auto_suspend = 60
+    auto_resume = true
+    min_cluster_count = 1
+    max_cluster_count = 1
+    scaling_policy = 'standard';
+
+    -- change role to accountadmin
+create user snowpark_user
+    password = 'Test@123'
+    comment = 'This is Snowpark User'
+    default_role = sysadmin
+    default_secondary_roles = ('All')
+    must_change_password = false;
+
+    -- grants
+    grant role sysadmin to user snowpark_user;
+    grant USAGE on warehouse snowspark_etl to role sysadmin;
